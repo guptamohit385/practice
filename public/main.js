@@ -9,18 +9,6 @@ var socket = io.connect('/chatRoom');
     console.error(e);
   }
 
-var canvas = document.getElementById('priview');
-var context = canvas.getContext('2d');
-var vedio = document.getElementById('strVid');
-var venderURL = window.URL || window.webkitURL;
-
-navigator.getUserMedia = (navigator.getUserMedia ||
- navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-
-if(navigator.getUserMedia){
-  navigator.getUserMedia({video: true, audio: false}, loadCam, loadFail);
-}
-
 recognition.onstart = function() { 
   
   console.log('Voice recognition activated. Try speaking into the microphone.');
@@ -55,6 +43,14 @@ socket.emit('handshake', { user: name });
 socket.on('userAct', function (data) {
 
 	document.getElementById("logStatus").innerHTML = data.data + " and online users : " + data.counter;
+});
+
+socket.on('stream', function (image) {
+  var imag = document.getElementById("play");
+  imag.src = image;
+
+  // var vid = document.getElementById("recVid");
+  // vid.src = image;
 });
 
 socket.on('msg', function (data) {
@@ -113,27 +109,52 @@ function audioToText(){
   setTimeout(function(){
     recognition.stop();
   }, 30000)
-}
+};
 
-context.width = canvas.width = 800;
-context.height = canvas.height = 600;
+var video = document.getElementById('strVid');
+var canvas = document.getElementById('pview');
+var venderURL = window.URL || window.webkitURL;
 
-function vedioCall(){
-  viewVideo(vedio, context);
+navigator.getMedia =  navigator.getUserMedia ||
+                      navigator.webkitGetUserMedia || 
+                      navigator.mozGetUserMedia || 
+                      navigator.msGetUserMedia;
+
+window.requestAnimFrame = (function(callback){
+      return window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.oRequestAnimationFrame ||
+      window.msRequestAnimationFrame ||
+      function(callback){
+        window.setTimeout(callback, 1000 / 100);
+      };
+    })();
+
+var context = canvas.getContext('2d');
+
+context.width = canvas.width = 300;
+context.height = canvas.height = 200;
+
+function videoCall(){
+  navigator.getMedia({video: true, audio: false}, loadCam, loadFail);
 }
 
 function loadCam(stream){
-  vedio.src = venderURL.createObjectURL(stream);
-  vedio.play();
-  alert("cam loaded");
+  video.src = venderURL.createObjectURL(stream);
 }
 
 function loadFail(){
   alert("cam load fail");
 }
 
-function viewVideo(vedio, context){
-  context.drawImage(vedio, 0, 0, context.width, context.height);
+function viewVideo(video, context){
+  context.drawImage(video, 0, 0, context.width, context.height);
+  //canvas.toDataURL(). 'image/webp'
   socket.emit('stream', canvas.toDataURL('image/webp'));
 }
+
+setInterval(function(){
+  viewVideo(video, context);
+}, 50);
 

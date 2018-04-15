@@ -44,8 +44,7 @@ room.on('connection', function (socket) {
 	});
 
 	socket.on('stream', function(data){
-		console.log('stream connect');
-		socket.broadcast.emit('stream', data);
+		socket.emit('stream', data);
 	});
 
   	socket.on('message', function (data) {
