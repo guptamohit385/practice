@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>welcome</title>
+	<script type="text/javascript">
+		function save() {
+			localStorage.setItem("name", document.getElementById('username').value);
+		}
+	</script>
+</head>
+<body>
+	<br><br><br><br><br><br><br>
+	<form method="post" action="/user">
+		<center>
+			<input type="text" name="username" id="username" placeholder="username"> 
+			<input type="submit" name="submit" onclick="save()">
+		</center>
+	</form>
+	
+</body>
+</html>

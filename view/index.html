@@ -1,0 +1,40 @@
+<script src="/jquery-1.11.1.min.js"></script>
+<script src="/bootstrap.min.js"></script>
+<link href="/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<link rel="stylesheet" type="text/css" href="/main.css"></style>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/main.js"></script>
+
+<div id="logStatus"></div>
+<video id="strVid" src="" style="width: 200px; height: 300px;" autoplay="true"></video>
+<canvas id="priview"></canvas>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="accordion">Chat</div>
+            <div>
+                <div id="panel-body" class="panel-body">
+                    <ul id="chatPool" class="cha`t"></ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." onkeydown="if (event.keyCode == 13) {sendMsg()}" />
+
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat" onclick="sendMsg()">Send</button>
+                            <input type="file" name="uploader" id="uploader" style="display: none" />
+                            <button class="btn btn-warning btn-sm" id="btn-chat" onclick="sendImg()">image</button>
+                            <button class="btn btn-warning btn-sm" id="btn-chat" onclick="sendVid()">vedio</button>
+                            <button class="btn btn-warning btn-sm" id="btn-chat" onclick="audioToText()">mike</button>
+                            <button class="btn btn-warning btn-sm" id="btn-chat" onclick="vedioCall()">vedioCall</button> 
+                        </span>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
