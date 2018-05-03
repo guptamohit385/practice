@@ -55,6 +55,10 @@ room.on('connection', function (socket) {
 		socket.emit('stream', data);
 	});
 
+	socket.on('image', function(data){
+		socket.emit('image', data);
+	});
+
   	socket.on('message', function (data) {
   		console.log('message recieved');
   		socket.broadcast.emit('msg', { username: data.name, msg: data.msg});

@@ -8,7 +8,6 @@
 
         <link rel="stylesheet" type="text/css" href="/main.css"></style>
         <script src="/socket.io/socket.io.js"></script>
-        
 </head>
 <body>
 
@@ -33,7 +32,7 @@
                             <button class="btn btn-warning btn-sm" id="btn-chat" onclick="sendImg()">image</button>
                             <button class="btn btn-warning btn-sm" id="btn-chat" onclick="sendVid()">video</button>
                             <button class="btn btn-warning btn-sm" id="btn-chat" onclick="audioToText()">mike</button>
-                            <button class="btn btn-warning btn-sm" id="btn-chat" onclick="videoCall()">videoCall</button> 
+                        <button class="btn btn-warning btn-sm" id="btn-chat" onclick="videoCall()">videoCall</button> 
                         </span>
                     </div>
                 </div>
@@ -42,12 +41,24 @@
         </div>
     </div>
 </div>
-<video id="strVid" src="" style="width: 200px; height: 300px;" autoplay="true" controls>
-    
-</video>
-<img id="play" width="400px" height="300px" />
+
+<!-- elements -->
+<video id="strVid" src="" style="width: 200px; height: 300px;" autoplay="true" style="float: left;"></video>
+<img id="play" width="400px" height="300px" style="float: left;"/>
 <canvas id="pview" style="display: none"></canvas>
+<input type="file" id="imgUpload" accept="image/x-png,image/gif,image/jpeg" style="display: none" 
+onchange="encodeImageFileAsURL('imgUpload');"/>
+<input type="file" id="vidUpload" accept="video/mp4,video/x-m4v,video/*" style="display: none" 
+onchange="encodeImageFileAsURL('vidUpload');"/>
+
+
+<img id="loadImg" width="400px" height="300px"/>
+
+<!-- scripts -->
+<script src="/vidCall.js"></script>
 <script src="/main.js"></script>
+<script src="/speechText.js"></script>
+
 </body>
 </html>
 
