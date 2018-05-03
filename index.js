@@ -1,7 +1,9 @@
 var express = require('express');
 var app = require('express')();
 var server = require('http').Server(app);
+const redisAdapter = require('socket.io-redis');
 var io = require('socket.io')(server);
+io.adapter(redisAdapter({ host: 'localhost', port: 6379 }));
 var bodyParser = require("body-parser");
 var path = require('path');
 var fs = require('fs');
@@ -29,7 +31,8 @@ room.on('connection', function (socket) {
 	socket.on('handshake', function(data){
 		console.log('a new user connected -- '+ data.user);
 		users.push({
-			name: data.user
+			name: data.user,
+			id: socket.id
 		});
 		var resp = { 
 			data: 'a new user connected, welcome '+ data.user , 
@@ -39,8 +42,13 @@ room.on('connection', function (socket) {
 	});
 
 	socket.on('disconnect', function(data){
-		console.log('a user disconnect');
+		console.log('a user disconnect' + data);
 		socket.broadcast.emit('userAct', { data: 'a user disconnect', counter: users.length});
+	});
+
+	socket.on('reconnect', function(data){
+		console.log('a user reconnect');
+		//socket.broadcast.emit('userAct', { data: 'a user disconnect', counter: users.length});
 	});
 
 	socket.on('stream', function(data){
@@ -50,5 +58,10 @@ room.on('connection', function (socket) {
   	socket.on('message', function (data) {
   		console.log('message recieved');
   		socket.broadcast.emit('msg', { username: data.name, msg: data.msg});
+  	});
+
+  	socket.on('message2one', function (data) {
+  		console.log('message2one recieved');
+  		socket.to(users[1].id).emit('msg', { username: data.name, msg: data.msg});
   	});
 });
