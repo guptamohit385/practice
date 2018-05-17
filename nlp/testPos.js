@@ -1,4 +1,11 @@
+"use strict";
+
 var pos = require('pos');
+
+if(!process.argv[2]){
+	console.log("please enter statement - node testPos.js 'what is my name?'");
+	process.exit(0);
+}
 var words = new pos.Lexer().lex(process.argv[2]);
 var quesArr = ["WDT","WP$", "WP", "WRB"];
 var taggedWords = new pos.Tagger().tag(words);
@@ -13,7 +20,8 @@ var ansBank = [
 		from: "USER",
 		relation:{},
 		expression: "bye",
-		ans: "ok, nice talking to you?"
+		count: 0,
+		ans: "ok, nice talking to you"
 	},
 	{
 		who: "USER",
@@ -24,6 +32,7 @@ var ansBank = [
 		from: "USER",
 		relation:{},
 		expression: "hi",
+		count: 0,
 		ans: "hello, My name is ROBOT how are you?"
 	},
 	{
@@ -35,6 +44,7 @@ var ansBank = [
 		from: "USER",
 		relation:{},
 		expression: "",
+		count: 0,
 		ans: "mohit is best"
 	},
 	{
@@ -44,6 +54,7 @@ var ansBank = [
 		when: "",
 		to: "USER",
 		from: "COMP",
+		count: 0,
 		relation:{
 			a2b: "name"
 		},
@@ -61,6 +72,7 @@ var ansBank = [
 			a2b: "name"
 		},
 		expression: "",
+		count: 0,
 		ans: "my name is ROBOT"
 	}
 ];
@@ -76,12 +88,14 @@ var formCode = {
 		a2b: ""
 	}
 };
+
 var ans;
-for (i in taggedWords) {
+
+for (var i in taggedWords) {
     var taggedWord = taggedWords[i];
     var word = taggedWord[0];
     var tag = taggedWord[1];
-    //console.log(word + " /" + tag);
+    console.log(word + " /" + tag);
     if(quesArr.includes(tag)){
     	if(tag == "WDT"){
 
@@ -98,7 +112,7 @@ for (i in taggedWords) {
     	formCode.who = "COMP";
     }
 
-    if(tag == "PRP$" && (word == "my" || word == "I")){
+    if((tag == "PRP$"|| tag == "PRP") && (word == "my" || word == "I" || word == "mine")){
     	formCode.who = "USER";
     }
 
