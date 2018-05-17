@@ -59,6 +59,11 @@ room.on('connection', function (socket) {
 		socket.emit('image', data);
 	});
 
+	socket.on('screenShare', function(data){
+		console,log(data);
+		socket.emit('screenShare', data);
+	});
+
   	socket.on('message', function (data) {
   		console.log('message recieved');
   		socket.broadcast.emit('msg', { username: data.name, msg: data.msg});

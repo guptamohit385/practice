@@ -1,27 +1,28 @@
 {
-	who: "mohit",
-	what: "best",
+	who: "USER",
+	what: "MOHIT",
 	where: "",
-	to: "",
-	from: "",
+	when: "",
+	to: "USER",
+	from: "COMP",
 	relation:[{
-		a2b: "father",
-		b2c: "frnd"
+		a2b: "name"
 	}],
-	ans: "mohit is best"
+	ans: "my name is mohit"
 
 },
 {
-	who: "mohit",
-	what: "best",
+	who: "COMP",
+	what: "ROBOT",
 	where: "",
-	to: "",
-	from: "",
+	when: "",
+	to: "COMP",
+	from: "USER",
 	relation:[{
-		a2b: "father",
-		b2c: "frnd"
+		a2b: "name"
 	}],
-	ans: "he told mohit is best"
+	ans: "my name is ROBOT"
+
 }
 
 var x = "https://www.npmjs.com/package/natural";

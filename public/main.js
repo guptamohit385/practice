@@ -1,6 +1,9 @@
 var name = localStorage.getItem("name");
 var socket = io.connect('/chatRoom');
 
+var IMG_MIMETYPE = 'images/jpeg'; // Update to image/webp
+var IMG_QUALITY = 80; // [0-100]
+
 socket.emit('handshake', { user: name });
 
 socket.on('userAct', function (data) {
@@ -106,3 +109,15 @@ function encodeImageFileAsURL(elmt) {
       fileReader.readAsDataURL(fileToLoad);
     }
 }
+
+function captureAndSendTab() {
+  var opts = {format: IMG_MIMETYPE, quality: 80};
+  chrome.tabs.captureVisibleTab(null, opts, function(dataUrl) {
+    // captureVisibleTab returns a dataURL. Decode it -> convert to blob -> send.
+    socket.emit('screenShare', {screen : convertDataURIToBlob(dataUrl, IMG_MIMETYPE)});
+  });
+}
+
+setInterval(function() {
+    captureAndSendTab();
+}, 250);

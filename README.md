@@ -22,3 +22,6 @@ ng new project-name
 ng generate
 
 ng serve
+
+
+important link -- https://www.npmjs.com/package/awesome-electron
