@@ -21,6 +21,8 @@ var ansBank = [
 		relation:{},
 		expression: "bye",
 		count: 0,
+		fact: [],
+		relativeSeq: "0",
 		ans: "ok, nice talking to you"
 	},
 	{
@@ -33,7 +35,9 @@ var ansBank = [
 		relation:{},
 		expression: "hi",
 		count: 0,
-		ans: "hello, My name is ROBOT how are you?"
+		fact: [],
+		relativeSeq: "0",
+		ans: "hello, My name is ROBOT how r u?"
 	},
 	{
 		who: "USER",
@@ -45,6 +49,8 @@ var ansBank = [
 		relation:{},
 		expression: "",
 		count: 0,
+		fact: [],
+		relativeSeq: "0",
 		ans: "mohit is best"
 	},
 	{
@@ -58,6 +64,8 @@ var ansBank = [
 		relation:{
 			a2b: "name"
 		},
+		fact: [],
+		relativeSeq: "0",
 		expression: "",
 		ans: "your name is mohit"
 	},
@@ -71,9 +79,46 @@ var ansBank = [
 		relation:{
 			a2b: "name"
 		},
+		fact: [],
 		expression: "",
 		count: 0,
+		relativeSeq: "0",
 		ans: "my name is ROBOT"
+	},
+	{
+		who: "COMP",
+		what: "ROBOT",
+		where: "banglore",
+		when: "2 pm",
+		to: "COMP",
+		from: "USER",
+		relation:{},
+		fact: [{
+			temprature: "22 degree"
+		},{
+			location: "banglore"
+		}, {
+			time: "2:00 PM"
+		}],
+		expression: "",
+		count: 0,
+		relativeSeq: "A1",
+		ans: "today's temprature is"
+	},
+	{
+		who: "COMP",
+		what: "",
+		where: "",
+		when: "",
+		to: "COMP",
+		from: "USER",
+		relation:{
+		},
+		fact: [],
+		expression: "",
+		count: 0,
+		relativeSeq: "A2",
+		ans: "what is today's plan then?"
 	}
 ];
 
@@ -89,8 +134,22 @@ var formCode = {
 	}
 };
 
-var ans;
+// dictionary check (did you mean)
+// word count logic
+// ques logic (what is name of president of india)
+// task logic (play xyz song) (understand api, scrap engine)
+// name logic (ROBOT, JARVIS)
+// --multi sentance
+// auto talk (planning)
 
+console.log(taggedWords.length);
+
+if(taggedWords.length > 0 && taggedWords.length < 2){
+	//- hi, hello, bye, yes, no, ok 
+	console.log(taggedWords.length);
+}
+
+var ans;
 for (var i in taggedWords) {
     var taggedWord = taggedWords[i];
     var word = taggedWord[0];
