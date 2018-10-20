@@ -25,3 +25,7 @@ ng serve
 
 
 important link -- https://www.npmjs.com/package/awesome-electron
+https://chatbotsmagazine.com/3-dimensions-of-an-intelligent-chatbot-d427933676f9
+
+
+https://chatbotsmagazine.com/contextual-chat-bots-with-tensorflow-4391749d0077

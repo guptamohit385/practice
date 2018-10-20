@@ -145,7 +145,7 @@ var formCode = {
 console.log(taggedWords.length);
 
 if(taggedWords.length > 0 && taggedWords.length < 2){
-	//- hi, hello, bye, yes, no, ok 
+	//- hi, hello, bye, yes, no, ok, sorry, thanks
 	console.log(taggedWords.length);
 }
 
