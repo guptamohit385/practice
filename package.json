@@ -14,7 +14,7 @@
     "http": "0.0.0",
     "natural": "^0.5.6",
     "pos": "^0.4.2",
-    "socket.io": "^2.0.4",
+    "socket.io": "^2.5.0",
     "socket.io-redis": "^5.2.0",
     "wordnet-db": "^3.1.6"
   }
